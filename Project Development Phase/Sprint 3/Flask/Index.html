@@ -1,0 +1,75 @@
+<html>
+<meta http-equiv="refresh" content="7">
+
+<head>
+<title>FLIGHT TIME MONITORING SYSTEM</title>
+<style>
+body {
+  background-image: url('https://gray-wmctv-prod.cdn.arcpublishing.com/resizer/vT_u4ug5rpiN8U8G20iJ8LORWSM=/1200x800/smart/filters:quality(85)/cloudfront-us-east-1.images.arcpublishing.com/gray/5V62QS6ZHNF6DBA7656F3RS4UY.jpg');
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;}
+</style>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
+
+
+<script>
+
+    $(function() {
+
+
+   var people = [];
+
+   $.getJSON('  https://api.thingspeak.com/channels/692121/feeds.json?results=1', function(data) {
+       $.each(data.feeds, function(i, f) {
+          var tblRow = "<tr>" + "<td>" + f.created_at + "</td>" +"<td>" + f.entry_id + "</td>" + "<td>" + f.field1 + "</td>"+"</tr>"
+
+           $(tblRow).appendTo("#userdata tbody");
+     });
+
+   });
+
+});
+</script>
+
+
+
+</head>
+<body style="background-color:White;">
+<br><br><br><br><br><br><br><br><br><br><br><br>
+<center style="color:red">
+<h1>FLIGHT TIME MONITORING SYSTEM</h1>
+
+</center><br><br><br><br><br><br><
+<center>
+<table id= "userdata" border="2">
+  <thead>
+            <th>Date</th>
+            <th>S.no</th>
+            <th>DELAY TIME</th>
+
+
+
+
+           
+             </thead>
+    <tbody>
+    </tbody>
+   </table>
+
+  
+
+<center>
+
+
+
+<iframe id='track' frameborder="0" scrolling="no" width="1" height="1">
+</script>
+
+</center>
+
+</body>
+</html>
