@@ -1,1 +1,37 @@
+import pandas as pd
 
+df = pd.read_csv('flightdata.csv')
+df.head()
+
+
+df.shape
+df.isnull().values.any()
+
+df.isnull().sum()
+
+df = df[["MONTH", "DAY_OF_MONTH", "DAY_OF_WEEK", "ORIGIN", "DEST", "CRS_DEP_TIME", "ARR_DEL15"]]
+df.isnull().sum()
+
+df[df.isnull().values.any(axis=1)].head()
+
+df = df.fillna({'ARR_DEL15': 1})
+
+df.iloc[177:185]
+df.head()
+
+import math
+
+for index, row in df.iterrows():
+    df.loc[index, 'CRS_DEP_TIME'] = math.floor(row['CRS_DEP_TIME'] / 100)
+df.head()
+
+df = pd.get_dummies(df, columns=['ORIGIN', 'DEST'])
+df.head()
+
+from sklearn.model_selection import train_test_split
+train_x, test_x, train_y, test_y = train_test_split(df.drop('ARR_DEL15', axis=1), df['ARR_DEL15'], test_size=0.2, random_state=42)
+
+train_x.shape
+test_x.shape
+
+import pickle
